@@ -157,11 +157,7 @@ def load_config(*, config: Optional[IO], profile: Optional[str], secret_ids: Lis
     else:
         loaded_config = HelperConfig(secret_ids=[], environment_mappings={})
 
-    if profile is not None:
-        profile_env_map = KNOWN_CONFIGS[profile]
-    else:
-        profile_env_map = {}
-
+    profile_env_map = KNOWN_CONFIGS[profile] if profile is not None else {}
     all_secret_ids = _merge_key_ids(config_list=loaded_config.secret_ids, user_input_list=secret_ids)
     all_environment_mappings = _merge_mappings(
         config_mapping=loaded_config.environment_mappings, profile_mapping=profile_env_map

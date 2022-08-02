@@ -148,17 +148,19 @@ def test_load_config_success(monkeypatch, loaded_config, profile, secret_ids, ex
 
 def _load_config_scenarios_fail():
     yield pytest.param(
-        HelperConfig(secret_ids=[], environment_mappings=dict()),
+        HelperConfig(secret_ids=[], environment_mappings={}),
         None,
         ["secret-a", "secret-b"],
         id="no config, some secrets, no profile",
     )
+
     yield pytest.param(
-        HelperConfig(secret_ids=[], environment_mappings=dict()),
+        HelperConfig(secret_ids=[], environment_mappings={}),
         "twine",
         [],
         id="no config, no user secrets, twine profile",
     )
+
     yield pytest.param(
         HelperConfig(secret_ids=[], environment_mappings=dict(username="VAL_A")),
         "twine",

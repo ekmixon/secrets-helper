@@ -18,12 +18,10 @@ SECRET_ID_VAR = "SECRETS_HELPER_TEST_SECRETS"
 
 def get_all_secret_ids():
     raw_values = os.environ.get(SECRET_ID_VAR, "")
-    values = [v.strip() for v in raw_values.split(",")]
-
-    if not values:
+    if values := [v.strip() for v in raw_values.split(",")]:
+        return values
+    else:
         raise EnvironmentError(
             f'The "{SECRET_ID_VAR}" variable MUST be set to a comma-delimited list of secret IDs'
             f" in order to run integration tests."
         )
-
-    return values

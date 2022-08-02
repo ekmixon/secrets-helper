@@ -42,10 +42,7 @@ def _tag_in_string(*, source: str, tag: Tag) -> bool:
     if tag.start not in source:
         return False
 
-    if tag.end not in source[source.index(tag.start) + len(tag.start) :]:
-        return False
-
-    return True
+    return tag.end in source[source.index(tag.start) + len(tag.start) :]
 
 
 def _value_to_triplet(source: str, tag: Tag) -> Iterable[str]:
